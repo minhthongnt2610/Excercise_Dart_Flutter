@@ -86,4 +86,5 @@ void main() {
 
   var result = company.getToTalSalary();
   print('Total salary: ${result}');
+  
 }
