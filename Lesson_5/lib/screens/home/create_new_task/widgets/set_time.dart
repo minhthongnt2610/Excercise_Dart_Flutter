@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lesson_5/constants/app_icons.dart';
 
+import '../../../../constants/app_colors.dart';
+
 class SetTime extends StatefulWidget {
   const SetTime({
     super.key,
@@ -41,9 +43,10 @@ class _setTime extends State<SetTime> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 20,
+        horizontal: 27,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             widget.title,
@@ -83,6 +86,11 @@ class _setTime extends State<SetTime> {
                   ),
                 ),
               ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              filled: true,
+              fillColor: AppColors.hex181818,
             ),
           ),
         ],

@@ -7,4 +7,5 @@ class AppIcons {
   static const search = 'assets/icons/search.png';
   static const back = 'assets/icons/back.png';
   static const clock = 'assets/icons/clock.png';
+  static const on = 'assets/icons/On.png';
 }

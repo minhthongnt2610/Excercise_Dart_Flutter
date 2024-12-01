@@ -4,11 +4,9 @@ class InputTextFiled extends StatefulWidget {
   const InputTextFiled({
     super.key,
     required this.hint,
-    required this.sizeWeigh,
     required this.maxLines,
   });
   final String hint;
-  final int sizeWeigh;
   final int maxLines;
 
   @override
