@@ -10,6 +10,7 @@ import 'package:lesson_5/screens/home/widgets/task_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() {
     return _HomeScreenState();
