@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:lesson_5/constants/app_colors.dart';
+import 'package:lesson_5/data/model/task_model.dart';
+import 'package:lesson_5/data/model/task_priority.dart';
 
-class TodayTask extends StatefulWidget {
-  final String title;
-  final bool choose;
-  final Color colors;
-  final String date;
-  const TodayTask({
-    required this.colors,
-    required this.title,
-    required this.choose,
-    required this.date,
+import '../../../constants/app_colors.dart';
+import '../../../data/model/task_status.dart';
+
+class TaskItem extends StatelessWidget {
+  const TaskItem({
     super.key,
+    required this.taskModel,
+    required this.onStatusChanged,
   });
-
-  @override
-  State<TodayTask> createState() => _TodayTaskState();
-}
-
-class _TodayTaskState extends State<TodayTask> {
+  final TaskModel taskModel;
+  final ValueChanged<TaskStatus> onStatusChanged;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +35,7 @@ class _TodayTaskState extends State<TodayTask> {
                 topLeft: Radius.circular(7.5),
                 bottomLeft: Radius.circular(7.5),
               ),
-              color: widget.colors,
+              color: taskModel.taskPriority.color,
             ),
           ),
           const SizedBox(
@@ -53,7 +47,7 @@ class _TodayTaskState extends State<TodayTask> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  widget.title,
+                  taskModel.name,
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
@@ -66,7 +60,7 @@ class _TodayTaskState extends State<TodayTask> {
                       color: Color.fromRGBO(255, 255, 255, 0.8),
                     ),
                     Text(
-                      widget.date,
+                      taskModel.displayDate,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color.fromRGBO(255, 255, 255, 0.8),
@@ -77,25 +71,24 @@ class _TodayTaskState extends State<TodayTask> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 16,
+          GestureDetector(
+            onTap: () {
+              if (taskModel.taskStatus == TaskStatus.complete) {
+                onStatusChanged.call(TaskStatus.incomplete);
+              } else {
+                onStatusChanged.call(TaskStatus.complete);
+              }
+            },
+            behavior: HitTestBehavior.translucent,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Image.asset(
+                taskModel.taskStatus.icon,
+                width: 26,
+                height: 26,
+              ),
             ),
-            height: 26,
-            width: 26,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: (widget.choose == true) ? AppColors.hexBA83DE : null,
-              border: Border.all(color: AppColors.hexBA83DE, width: 2),
-            ),
-            child: widget.choose == true
-                ? const Icon(
-                    Icons.check,
-                    size: 18,
-                  )
-                : null,
-          )
+          ),
         ],
       ),
     );

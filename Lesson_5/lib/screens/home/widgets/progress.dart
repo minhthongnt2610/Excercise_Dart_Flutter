@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:lesson_5/constants/app_colors.dart';
 
 class Progress extends StatelessWidget {
-  const Progress({super.key});
-
+  const Progress({
+    super.key,
+    required this.numberOfTask,
+    required this.numberOfCompleteTask,
+  });
+  final int numberOfTask;
+  final int numberOfCompleteTask;
   @override
   Widget build(BuildContext context) {
+    final progressBarWidth = MediaQuery.of(context).size.width - 2 * (20 + 20);
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -31,16 +37,16 @@ class Progress extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Text(
-            "2/3 Task Completed",
-            style: TextStyle(
+          Text(
+            "$numberOfCompleteTask/$numberOfTask Task Completed",
+            style: const TextStyle(
               fontSize: 18,
               color: Color.fromRGBO(255, 255, 255, 0.8),
             ),
           ),
-          const Row(
+          Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: Text(
                   "You are almost done go ahead",
                   style: TextStyle(
@@ -50,8 +56,8 @@ class Progress extends StatelessWidget {
                 ),
               ),
               Text(
-                "66%",
-                style: TextStyle(
+                "${(numberOfCompleteTask / numberOfTask * 100).floor()}%",
+                style: const TextStyle(
                   fontSize: 18,
                   color: Colors.white,
                 ),
@@ -61,24 +67,25 @@ class Progress extends StatelessWidget {
           const SizedBox(
             height: 6,
           ),
-          Container(
-              height: 18,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: const Color.fromRGBO(188, 131, 222, 0.41),
+          Stack(
+            children: [
+              Container(
+                height: 18,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color.fromRGBO(188, 131, 222, 0.41),
+                ),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    height: 18,
-                    width: 242,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: AppColors.hexBA83DE,
-                    ),
-                  ),
-                ],
-              ))
+              Container(
+                height: 18,
+                width: progressBarWidth * numberOfCompleteTask / numberOfTask,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: AppColors.hexBA83DE,
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );

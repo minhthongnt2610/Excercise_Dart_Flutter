@@ -12,7 +12,7 @@ class Header extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
-        vertical: 16,
+        vertical: 15,
       ),
       child: Row(
         children: [

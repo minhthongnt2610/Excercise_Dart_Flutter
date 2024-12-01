@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lesson_5/screens/home_screen.dart';
+import 'package:lesson_5/screens/home/create_new_task/create_new_task_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "list",
-      home: HomeScreen(),
+      home: CreateNewTaskScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
