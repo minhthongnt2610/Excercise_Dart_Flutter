@@ -12,7 +12,6 @@ class SecondaryButton extends StatelessWidget {
   final bool isSelected;
   final Color color;
   final VoidCallback onTap;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(

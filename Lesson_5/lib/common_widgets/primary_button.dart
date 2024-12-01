@@ -8,7 +8,6 @@ class PrimaryButton extends StatelessWidget {
     required this.title,
   });
   final String title;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
