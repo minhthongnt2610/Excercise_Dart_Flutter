@@ -6,7 +6,6 @@ enum TaskPriority {
   medium,
   low,
 }
-
 extension TaskPriorityExtension on TaskPriority {
   Color get color {
     switch (this) {
