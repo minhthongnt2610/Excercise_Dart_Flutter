@@ -129,4 +129,3 @@ class _createNewTaskScreen extends State<CreateNewTaskScreen> {
     );
   }
 }
-

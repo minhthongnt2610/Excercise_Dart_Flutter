@@ -27,4 +27,3 @@ class HeaderNewTask extends StatelessWidget {
     );
   }
 }
-
