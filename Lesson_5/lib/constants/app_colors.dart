@@ -8,3 +8,5 @@ class AppColors {
   static const hex020206 = Color(0xFF020206);
   static const hex181818 = Color(0xFF181818);
 }
+
+

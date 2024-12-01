@@ -9,3 +9,4 @@ class AppIcons {
   static const clock = 'assets/icons/clock.png';
   static const on = 'assets/icons/On.png';
 }
+
