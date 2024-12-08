@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lesson_5/common_widgets/secondary_button.dart';
 import 'package:lesson_5/data/model/task_priority.dart';
+
+import '../../../../common_widgets/secondary_button.dart';
 
 class PriorityItem extends StatelessWidget {
   const PriorityItem({

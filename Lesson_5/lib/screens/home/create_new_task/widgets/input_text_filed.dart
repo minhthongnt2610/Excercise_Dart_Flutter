@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lesson_5/constants/app_colors.dart';
 
 class InputTextFiled extends StatefulWidget {
   const InputTextFiled({
@@ -20,7 +21,7 @@ class _inputTextFiledState extends State<InputTextFiled> {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: 27,
+        horizontal: 20,
       ),
       child: TextFormField(
         controller: _controller,
@@ -30,14 +31,18 @@ class _inputTextFiledState extends State<InputTextFiled> {
         ),
         maxLines: widget.maxLines,
         decoration: InputDecoration(
-            hintText: widget.hint,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              color: Colors.white.withOpacity(0.8),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-            )),
+          hintText: widget.hint,
+          hintStyle: TextStyle(
+            fontSize: 16,
+            color: Colors.white.withOpacity(0.8),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: AppColors.hex181818,
+        ),
       ),
     );
   }

@@ -17,13 +17,12 @@ class SecondaryButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        //width: 105,
         height: 40,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
           color: isSelected ? color : Colors.transparent,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
           border: Border.all(
-            width: isSelected ? 2 : 0,
+            width: isSelected ? 0 : 2,
             color: color,
           ),
         ),

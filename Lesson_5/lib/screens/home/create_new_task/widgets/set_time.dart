@@ -41,60 +41,60 @@ class _setTime extends State<SetTime> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 27,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.title,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white.withOpacity(0.8),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.title,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white.withOpacity(0.8),
           ),
-          const SizedBox(
-            height: 8,
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        TextFormField(
+          controller: timeInput,
+          style: TextStyle(
+            color: Colors.white.withOpacity(0.8),
+            fontSize: 16,
           ),
-          TextFormField(
-            controller: timeInput,
-            style: TextStyle(
+          readOnly: true,
+          onTap: () async {
+            final setTime = await showTimePicker(
+              context: context,
+              initialTime: widget.time,
+            );
+            if (setTime != null) {
+              widget.onChanged.call(setTime);
+              timeInput.text = formatTimeOfDay(setTime);
+            }
+          },
+          decoration: InputDecoration(
+            hintStyle: TextStyle(
               color: Colors.white.withOpacity(0.8),
-              fontSize: 18,
+              fontSize: 16,
             ),
-            readOnly: true,
-            onTap: () async {
-              final setTime = await showTimePicker(
-                context: context,
-                initialTime: widget.time,
-              );
-              if (setTime != null) {
-                widget.onChanged.call(setTime);
-                timeInput.text = formatTimeOfDay(setTime);
-              }
-            },
-            decoration: InputDecoration(
-              prefixIcon: SizedBox(
-                width: 44,
-                child: Center(
-                  child: Image.asset(
-                    AppIcons.clock,
-                    width: 24,
-                    height: 24,
-                  ),
+            prefixIcon: SizedBox(
+              width: 44,
+              child: Center(
+                child: Image.asset(
+                  AppIcons.clock,
+                  width: 24,
+                  height: 24,
                 ),
               ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              filled: true,
-              fillColor: AppColors.hex181818,
             ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: AppColors.hex181818,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
