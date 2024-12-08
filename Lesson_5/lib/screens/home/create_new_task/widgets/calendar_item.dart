@@ -12,7 +12,6 @@ class CalendarItem extends StatelessWidget {
   final String weekDay;
   final String day;
   final bool isSelected;
-
   @override
   Widget build(BuildContext context) {
     return Padding(

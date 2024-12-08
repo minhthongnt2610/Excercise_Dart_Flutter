@@ -7,9 +7,11 @@ class HeaderNewTask extends StatelessWidget {
     required this.opacity,
     required this.fontSize,
   });
+
   final String title;
   final double opacity;
   final double fontSize;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
