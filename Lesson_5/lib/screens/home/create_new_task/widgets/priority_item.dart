@@ -13,7 +13,6 @@ class PriorityItem extends StatelessWidget {
   final TaskPriority? taskPriority;
   final List<TaskPriority> taskPrioritis;
   final ValueChanged<TaskPriority> onTaskpriorityChanged;
-
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];

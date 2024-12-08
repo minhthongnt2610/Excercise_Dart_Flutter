@@ -7,8 +7,10 @@ class Progress extends StatelessWidget {
     required this.numberOfTask,
     required this.numberOfCompleteTask,
   });
+
   final int numberOfTask;
   final int numberOfCompleteTask;
+
   @override
   Widget build(BuildContext context) {
     final progressBarWidth = MediaQuery.of(context).size.width - 2 * (20 + 20);
