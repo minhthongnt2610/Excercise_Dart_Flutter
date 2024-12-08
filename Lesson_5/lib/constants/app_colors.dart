@@ -7,4 +7,6 @@ class AppColors {
   static const hexFAD9FF = Color(0xFFFAD9FF);
   static const hex020206 = Color(0xFF020206);
   static const hex181818 = Color(0xFF181818);
+  static const hexDE83B0 = Color(0xFFDE83B0);
+  static const hexC59ADF = Color(0xFFC59ADF);
 }

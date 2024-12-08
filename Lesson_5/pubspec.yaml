@@ -36,6 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   intl: ^0.20.1
+  time: ^2.1.5
+#  week_day_picker: ^1.1.4
+#  day_picker: ^2.3.0
 
 dev_dependencies:
   flutter_test:

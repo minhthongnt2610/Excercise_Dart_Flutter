@@ -15,7 +15,7 @@ class HeaderNewTask extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: 27,
+        horizontal: 20,
       ),
       child: Text(
         title,
