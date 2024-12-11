@@ -44,11 +44,10 @@ class _createNewTaskScreen extends State<CreateNewTaskScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: SetDate(),
+            SetDate(
+              date: DateTime.now(),
+              selectedDate: DateTime.now(),
+              onDateChanged: (date) {},
             ),
             const HeaderNewTask(
               title: 'Schedule',
@@ -142,10 +141,10 @@ class _createNewTaskScreen extends State<CreateNewTaskScreen> {
               height: 30,
             ),
             const Padding(
-              padding: const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: const PrimaryButton(title: "Create Task"),
+              child: PrimaryButton(title: "Create Task"),
             ),
           ],
         ),

@@ -11,6 +11,7 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       customBorder: const CircleBorder(),
       child: Container(
         width: 71,

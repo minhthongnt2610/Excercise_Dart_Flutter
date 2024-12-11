@@ -8,4 +8,6 @@ class AppIcons {
   static const back = 'assets/icons/back.png';
   static const clock = 'assets/icons/clock.png';
   static const on = 'assets/icons/On.png';
+  static const leftArrow = 'assets/icons/left_arrow.png';
+  static const rightArrow = 'assets/icons/right_arrow.png';
 }

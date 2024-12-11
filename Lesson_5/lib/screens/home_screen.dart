@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
       taskStatus: TaskStatus.incomplete,
     ),
     TaskModel(
-      id: 4,
+      id: 6,
       name: 'Website Research',
       description: 'Website Research',
       startTime: TimeOfDay.now(),
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       taskStatus: TaskStatus.complete,
     ),
     TaskModel(
-      id: 5,
+      id: 7,
       name: 'Prepare Wireframe for Main Flow',
       description: 'Prepare Wireframe for Main Flow',
       startTime: TimeOfDay.now(),
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
       taskStatus: TaskStatus.complete,
     ),
     TaskModel(
-      id: 6,
+      id: 8,
       name: 'Prepare Screens',
       description: 'Prepare Screens',
       startTime: TimeOfDay.now(),
@@ -111,73 +111,75 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  //vertical: 12,
-                  horizontal: 20,
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    //vertical: 12,
+                    horizontal: 20,
+                  ),
+                  child: SearchField(
+                    hintText: "Search task here",
+                    onChanged: (value) {
+                      debugPrint("Search text changed: $value");
+                    },
+                  ),
                 ),
-                child: SearchField(
-                  hintText: "Search task here",
-                  onChanged: (value) {
-                    debugPrint("Search text changed: $value");
+                const SizedBox(
+                  height: 15,
+                ),
+                const Header(title: "Progress"),
+                Progress(
+                  numberOfTask: todayTasks.length,
+                  numberOfCompleteTask: numberOfCompletedTodayTask,
+                ),
+                const Header(title: "Today's Task"),
+                ListView.builder(
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return TaskItem(
+                      taskModel: todayTasks[index],
+                      onStatusChanged: (taskStatus) {
+                        final taskIndex = tasks.indexWhere(
+                          (e) => e.id == todayTasks[index].id,
+                        );
+                        setState(() {
+                          tasks[taskIndex] = todayTasks[index]
+                              .copyWith(taskStatus: taskStatus);
+                        });
+                      },
+                    );
                   },
+                  itemCount: todayTasks.length,
+                  shrinkWrap: true,
                 ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Header(title: "Progress"),
-              Progress(
-                numberOfTask: todayTasks.length,
-                numberOfCompleteTask: numberOfCompletedTodayTask,
-              ),
-              const Header(title: "Today's Task"),
-              ListView.builder(
-                padding: EdgeInsets.zero,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return TaskItem(
-                    taskModel: todayTasks[index],
-                    onStatusChanged: (taskStatus) {
-                      final taskIndex = tasks.indexWhere(
-                        (e) => e.id == todayTasks[index].id,
-                      );
-                      setState(() {
-                        tasks[taskIndex] =
-                            todayTasks[index].copyWith(taskStatus: taskStatus);
-                      });
-                    },
-                  );
-                },
-                itemCount: todayTasks.length,
-                shrinkWrap: true,
-              ),
-              const Header(title: "Tomorrow Task"),
-              ListView.builder(
-                padding: EdgeInsets.zero,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return TaskItem(
-                    taskModel: tomorrowTasks[index],
-                    onStatusChanged: (taskStatus) {
-                      final tomorrowTaskIndex = tasks.indexWhere(
-                        (e) => e.id == tomorrowTasks[index].id,
-                      );
-                      setState(() {
-                        tasks[tomorrowTaskIndex] = tomorrowTasks[index]
-                            .copyWith(taskStatus: taskStatus);
-                      });
-                    },
-                  );
-                },
-                itemCount: todayTasks.length,
-                shrinkWrap: true,
-              ),
-            ],
-          ),
+                const Header(title: "Tomorrow Task"),
+                ListView.builder(
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return TaskItem(
+                      taskModel: tomorrowTasks[index],
+                      onStatusChanged: (taskStatus) {
+                        final tomorrowTaskIndex = tasks.indexWhere(
+                          (e) => e.id == tomorrowTasks[index].id,
+                        );
+                        setState(() {
+                          tasks[tomorrowTaskIndex] = tomorrowTasks[index]
+                              .copyWith(taskStatus: taskStatus);
+                        });
+                      },
+                    );
+                  },
+                  itemCount: todayTasks.length,
+                  shrinkWrap: true,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
       floatingActionButton: AddButton(onTap: () {
