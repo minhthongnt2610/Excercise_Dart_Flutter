@@ -24,7 +24,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.white,
         ),
       ),
-      leadingWidth: 69,
+      // leadingWidth: 69,
       leading: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: GestureDetector(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lesson_5/constants/app_colors.dart';
+import 'package:lesson_5/screens/screen_all_task/screen_all_task.dart';
 
 class Header extends StatelessWidget {
   final String title;
@@ -25,13 +26,24 @@ class Header extends StatelessWidget {
               ),
             ),
           ),
-          const Text(
-            "See All",
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.hexBA83DE,
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const ScreenAllTask();
+                  },
+                ),
+              );
+            },
+            child: const Text(
+              "See All",
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.hexBA83DE,
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
