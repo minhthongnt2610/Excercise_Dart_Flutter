@@ -3,22 +3,20 @@ import 'package:lesson_5/constants/app_colors.dart';
 import 'package:lesson_5/data/model/task_model.dart';
 import 'package:lesson_5/data/model/task_priority.dart';
 import 'package:lesson_5/data/model/task_status.dart';
-import 'package:lesson_5/screens/home/create_new_task/model/new_tasks_screen_argument.dart';
+import 'package:lesson_5/screens/home/create_new_task/create_new_task_screen.dart';
 import 'package:lesson_5/screens/home/widgets/add_button.dart';
 import 'package:lesson_5/screens/home/widgets/header.dart';
 import 'package:lesson_5/screens/home/widgets/home_app_bar.dart';
 import 'package:lesson_5/screens/home/widgets/progress.dart';
 import 'package:lesson_5/screens/screen_all_task/screen_all_task.dart';
-import 'package:lesson_5/screens/screen_all_task/widgets/all_tasks_screen_argument.dart';
 import 'package:uuid/uuid.dart';
 
-import 'home/create_new_task/create_new_task_screen.dart';
 import 'home/widgets/search_field.dart';
 import 'home/widgets/task_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  static const routeName = '/home';
+
   @override
   State<HomeScreen> createState() {
     return _HomeScreenState();
@@ -137,7 +135,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Header(
                   title: "Progress",
                   onSeeTab: () {
-                    _showAllTaskScreen();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ScreenAllTask(
+                          tasks: tasks,
+                          selectedTab: 0,
+                        ),
+                      ),
+                    );
                   },
                 ),
                 Progress(
@@ -147,7 +152,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Header(
                   title: "Today's Task",
                   onSeeTab: () {
-                    _showAllTaskScreen();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ScreenAllTask(
+                          tasks: tasks,
+                          selectedTab: 1,
+                        ),
+                      ),
+                    );
                   },
                 ),
                 ListView.builder(
@@ -165,11 +177,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               .copyWith(taskStatus: taskStatus);
                         });
                       },
-                      onTap: () {
-                        _showToNewTaskScreen(
-                          taskModel: todayTasks[index],
-                        );
-                      },
                     );
                   },
                   itemCount: todayTasks.length,
@@ -178,7 +185,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Header(
                   title: "Tomorrow Task",
                   onSeeTab: () {
-                    _showAllTaskScreen();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ScreenAllTask(
+                          tasks: tasks,
+                          selectedTab: 2,
+                        ),
+                      ),
+                    );
                   },
                 ),
                 ListView.builder(
@@ -196,14 +210,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               .copyWith(taskStatus: taskStatus);
                         });
                       },
-                      onTap: () {
-                        _showToNewTaskScreen(
-                          taskModel: tomorrowTasks[index],
-                        );
-                      },
                     );
                   },
-                  itemCount: tomorrowTasks.length,
+                  itemCount: todayTasks.length,
                   shrinkWrap: true,
                 ),
               ],
@@ -212,43 +221,24 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: AddButton(
           onTap: () async {
-            _showToNewTaskScreen();
+            final newTaskModel = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return const CreateNewTaskScreen();
+                },
+              ),
+            ) as TaskModel?;
+            if (newTaskModel == null) {
+              return;
+            }
+            setState(() {
+              tasks.add(newTaskModel);
+            });
           },
         ),
         floatingActionButtonLocation:
             FloatingActionButtonLocation.miniCenterDocked,
       ),
     );
-  }
-
-  Future<void> _showAllTaskScreen() async {
-    await Navigator.of(context).pushNamed(
-      ScreenAllTask.routeName,
-      arguments: AllTasksScreenArgument(
-        tasks: tasks,
-      ),
-    );
-  }
-
-  Future<void> _showToNewTaskScreen({TaskModel? taskModel}) async {
-    final newTaskModel = await Navigator.of(context).pushNamed(
-      CreateNewTaskScreen.routeName,
-      arguments: NewTasksScreenArgument(
-        taskModel: taskModel,
-      ),
-    ) as TaskModel?;
-    if (newTaskModel != null) {
-      return;
-    }
-    setState(() {
-      if (taskModel != null) {
-        /// Nếu taskModel != null thì cập nhật công việc
-        final taskIndex = tasks.indexWhere((e) => e.id == taskModel.id);
-        tasks[taskIndex] = newTaskModel!;
-      } else {
-        /// Nếu taskModel == null thì thêm công việc mới
-        tasks.add(newTaskModel!);
-      }
-    });
   }
 }

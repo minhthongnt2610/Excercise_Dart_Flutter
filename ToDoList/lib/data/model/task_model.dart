@@ -23,7 +23,6 @@ class TaskModel {
   final DateTime date;
   final TaskPriority taskPriority;
   final TaskStatus taskStatus;
-
   TaskModel copyWith({
     String? id,
     String? name,

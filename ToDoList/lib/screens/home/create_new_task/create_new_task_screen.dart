@@ -4,7 +4,6 @@ import 'package:lesson_5/constants/app_colors.dart';
 import 'package:lesson_5/data/model/task_model.dart';
 import 'package:lesson_5/data/model/task_priority.dart';
 import 'package:lesson_5/data/model/task_status.dart';
-import 'package:lesson_5/screens/home/create_new_task/model/new_tasks_screen_argument.dart';
 import 'package:lesson_5/screens/home/create_new_task/widgets/header_new_task.dart';
 import 'package:lesson_5/screens/home/create_new_task/widgets/input_text_filed.dart';
 import 'package:lesson_5/screens/home/create_new_task/widgets/priority_item.dart';
@@ -17,9 +16,7 @@ import '../../../common_widgets/primary_button.dart';
 import '../../../constants/app_icons.dart';
 
 class CreateNewTaskScreen extends StatefulWidget {
-  const CreateNewTaskScreen({super.key, required this.arguments});
-  static const routeName = '/create_new_task';
-  final NewTasksScreenArgument arguments;
+  const CreateNewTaskScreen({super.key});
 
   @override
   State<CreateNewTaskScreen> createState() => _createNewTaskScreen();
@@ -32,26 +29,12 @@ class _createNewTaskScreen extends State<CreateNewTaskScreen> {
   late TimeOfDay startTime;
   late TimeOfDay endTime;
   TaskPriority? selectedTaskPriority;
-  bool _isEditing = false;
   @override
   void initState() {
     super.initState();
-    final taskModel = widget.arguments.taskModel;
-    if (taskModel != null) {
-      /// Cập nhật thông tin công việc cần chỉnh sửa
-      selectedDate = taskModel.date;
-      startTime = taskModel.startTime;
-      endTime = taskModel.endTime;
-      name = taskModel.name;
-      description = taskModel.description;
-      selectedTaskPriority = taskModel.taskPriority;
-      _isEditing = true;
-    } else {
-      /// Cài đặt thông tin mặc định cho công việc mới
-      selectedDate = DateTime.now();
-      startTime = TimeOfDay.now();
-      endTime = startTime.replacing(hour: startTime.hour + 1);
-    }
+    selectedDate = DateTime.now();
+    startTime = TimeOfDay.now();
+    endTime = startTime.replacing(hour: startTime.hour + 1);
   }
 
   @override
@@ -62,7 +45,7 @@ class _createNewTaskScreen extends State<CreateNewTaskScreen> {
       },
       child: Scaffold(
         appBar: PrimaryAppBar(
-          title: _isEditing ? 'Edit task' : 'Create new task',
+          title: 'Create new task',
           onBack: () {
             Navigator.of(context).pop(
               MaterialPageRoute(
@@ -199,7 +182,7 @@ class _createNewTaskScreen extends State<CreateNewTaskScreen> {
                   horizontal: 20,
                 ),
                 child: PrimaryButton(
-                  title: _isEditing ? "Edit task " : "Create Task",
+                  title: "Create Task",
                   onTap: () {
                     debugPrint('Date: $selectedDate');
                     debugPrint('Name: $name');

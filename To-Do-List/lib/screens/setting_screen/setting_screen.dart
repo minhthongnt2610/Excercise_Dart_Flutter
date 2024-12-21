@@ -3,7 +3,7 @@ import 'package:lesson_5/constants/app_colors.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
-
+  static const routeName = '/setting';
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }

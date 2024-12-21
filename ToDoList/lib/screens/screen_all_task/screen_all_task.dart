@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lesson_5/constants/app_colors.dart';
-import 'package:lesson_5/screens/screen_all_task/widgets/all_tasks_screen_argument.dart';
 
 import '../../common_widgets/primary_app_bar.dart';
 import '../../data/model/task_model.dart';
@@ -10,24 +9,19 @@ import '../home_screen.dart';
 class ScreenAllTask extends StatefulWidget {
   const ScreenAllTask({
     super.key,
-    required this.arguments,
+    required this.tasks,
+    required this.selectedTab,
   });
-  static const routeName = '/screen_all_task';
-
-  final AllTasksScreenArgument arguments;
+  final int selectedTab;
+  final List<TaskModel> tasks;
   @override
   State<ScreenAllTask> createState() => _ScreenAllTaskState();
 }
 
 class _ScreenAllTaskState extends State<ScreenAllTask> {
-  late List<TaskModel> allTasks;
-  void initState() {
-    super.initState();
-    allTasks = widget.arguments.tasks;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final allTasks = widget.tasks;
     final todayTasks = allTasks.where((tasks) {
       return DateUtils.isSameDay(
         tasks.date,
@@ -42,7 +36,7 @@ class _ScreenAllTaskState extends State<ScreenAllTask> {
           ));
     }).toList();
     return DefaultTabController(
-      // initialIndex: widget.selectedTab,
+      initialIndex: widget.selectedTab,
       length: 3,
       child: Scaffold(
         backgroundColor: AppColors.hex020206,
@@ -104,10 +98,7 @@ class _ScreenAllTaskState extends State<ScreenAllTask> {
       // physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return TaskItem(
-          taskModel: tasks[index],
-          onStatusChanged: (taskStatus) {},
-          onTap: () {},
-        );
+            taskModel: tasks[index], onStatusChanged: (taskStatus) {});
       },
       itemCount: tasks.length,
     );
